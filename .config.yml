@@ -1,0 +1,6 @@
+title: Ganesh's Notes
+description: Notes on deep learning and neural ODEs
+theme: minima
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
