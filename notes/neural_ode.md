@@ -4,6 +4,7 @@
 $$
 h_{t + 1} = h_{t} + f(h_{t}, \theta_{t})
 $$
+
 * Parametrizing as ODE we get the neural network specify the derivative of the hidden state. $h(0)$ serves as the input and $h(T)$ the solution to this ODE. 
 
 $$
@@ -11,6 +12,7 @@ $$
 \frac{d\mathbf{h}(t)}{dt} &= f(\mathbf{h}(t), t, \theta)
 \end{aligned}
 $$
+
 * Benefits of defining and evaluating the models as ODE
 	* Memory efficiency
 	* Adaptive computation
@@ -27,7 +29,6 @@ Let us define the loss as
 $$
 \begin{align} \\
 L(\mathbf{z}(t_{1})) &= L\left(\mathbf{z}(t_{0}) + \int_{t_{0}}^{t_{1}} f(\mathbf{z}(t), t, \theta)dt\right) = L\left(ODESolve(\mathbf{z}(t_{0}), f, t_{0}, t_{1}, \theta)) \right) \tag{1}
-
 \end{align}
 $$
 
@@ -36,6 +37,7 @@ Let $\mathbf{z(t)}$ follow the differential equation $\frac{d\mathbf{z}(t)}{dt} 
 $$
 \mathbf{a}(t) = \frac{dL}{d\mathbf{z}(t)} \tag{2}
 $$
+
 Then this adjoint state follows the differential equation
 
 $$
