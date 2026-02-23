@@ -1,14 +1,11 @@
----
-layout: default
-title: Neural ODEs
----
-
 # 1 Intro
-* ODE is modeled as the limit of the below state transition equation, by taking smaller steps and increasing the number of layers.
+* ODE is modeled as the limit of the state transition equation defined below, by taking smaller steps and increasing the number of layers.
+
 $$
 h_{t + 1} = h_{t} + f(h_{t}, \theta_{t})
 $$
 * Parametrizing as ODE we get the neural network specify the derivative of the hidden state. $h(0)$ serves as the input and $h(T)$ the solution to this ODE. 
+
 $$
 \begin{aligned}
 \frac{d\mathbf{h}(t)}{dt} &= f(\mathbf{h}(t), t, \theta)
@@ -56,6 +53,7 @@ Assuming that the function $f(\mathbf{z}(t), t, \theta)$ is a smooth function th
 $$
 f(\mathbf{z}(\tau), \tau, \theta) = f(\mathbf{z}(t), t, \theta) + f'(\mathbf{z}(t), t, \theta)(\tau - t) + \frac{1}{2}f''(\mathbf{z}(t), t, \theta)(\tau - t)^2 + H.O.T \tag{5}
 $$
+
 Integrating this leads us to have the Taylor series expansion for integral
 
 $$
@@ -65,6 +63,7 @@ T_{\epsilon}(\mathbf{z}(t), t) &= \mathbf{z}(t) + \int_{t}^{t + \epsilon}f(\math
 T_{\epsilon}(\mathbf{z}(t), t) &= \mathbf{z}(t) + f(\mathbf{z}(t), t, \theta)\cdot \epsilon + f'(\mathbf{z}(t), t, \theta)\cdot \frac{\epsilon^2}{2} + f''(\mathbf{z}(t), t, \theta)\cdot\frac{\epsilon^3}{6} + H.O.T \tag{6}
 \end{align}
 $$
+
 In case of standard/traditional neural networks, the gradient of the hidden layer $\mathbf{h}_{t}$ depends on the gradient from the next layer $\mathbf{h}_{t + 1}$. Using chain rule we have
 
 $$
@@ -72,6 +71,7 @@ $$
 $$
 
 In case of continuous hidden state, applying the chain rule leads to 
+
 $$
 \begin{align}
 \frac{dL}{d\mathbf{z}(t)} &= \frac{dL}{d\mathbf{z}(t+\epsilon)}\cdot \frac{d\mathbf{z}(t + \epsilon)}{d\mathbf{z}(t)} \\
@@ -92,6 +92,7 @@ $$
 \frac{d\mathbf{a}(t)}{dt} &= -\mathbf{a}(t) \cdot \frac{\partial f(\mathbf{z}(t), t, \theta)}{\partial \mathbf{z}(t)} \tag{9}
 \end{align}
 $$
+
 Equation $(9)$ is similar to backpropagation defined in Equation $(7)$. We start with the last time step $t_N$ and move backwards in time solving the ODE. $\mathbf{a}(t_{N})$ becomes our initial condition and $\mathbf{a}(t_{0})$ our solution to the reverse ODE.
 
 $$
@@ -176,7 +177,6 @@ $$
 &= \mathbf{a}(t_{N}) \cdot \frac{d\mathbf{z}(t_{N})}{ds_{N}} \\
 \frac{dL}{dt_{N}} &= \mathbf{a}(t_{N}) f(\mathbf{z}(s_{N}), s_{N}, \theta) \tag{17}
 \end{align}
-
 $$
 
 Similarly we have gradient of L wrt $t_{0}$ as
