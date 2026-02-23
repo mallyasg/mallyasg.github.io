@@ -5,4 +5,4 @@ title: Home
 
 # Notes
 
-- [Neural ODEs](notes/neural-odes)
+- [Neural ODEs](notes/neural-ode)
